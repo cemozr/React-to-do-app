@@ -1,0 +1,7 @@
+import TaskList from "./TaskList";
+function TaskShow({ task }) {
+  console.log(task);
+  return <div></div>;
+}
+
+export default TaskShow;
