@@ -3,23 +3,52 @@
   flex-direction: column;
   align-items: center;
 }
+.task-form-edit-mode {
+  width: 100%;
+}
 .task-input {
   margin: 10px;
-  width: 15%;
+  width: 30%;
   border-radius: 10px;
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 3px 3px 3px #112d4e;
+  font-size: large;
 }
-
+.task-input-edit-mode {
+  width: 80% !important;
+}
+.task-input-title {
+  height: 4vh;
+  text-align: center;
+}
+label {
+  color: #1b508d;
+  font-size: larger;
+}
 .create-task-btn {
   margin: 10px;
-  width: 15%;
-  background-color: greenyellow;
+  width: 30%;
+  background-color: #3f72af;
   height: 30px;
   border-style: none;
   border-radius: 10px;
   font-weight: bold;
-  box-shadow: 2px 2px 2px black;
+  box-shadow: 3px 3px 3px #112d4e;
+  color: #f9f7f7;
+  font-size: larger;
 }
 label {
   font-weight: bold;
+}
+h1 {
+  color: #1b508d;
+  text-shadow: 1px 1px 3px;
+  border-bottom: 1px solid;
+  width: 100%;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.create-task-btn:hover {
+  box-shadow: 5px 5px 5px #112d4e;
+  cursor: pointer;
 }

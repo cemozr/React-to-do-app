@@ -1,0 +1,26 @@
+.task-card {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #112d4e;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 3px 3px #112d4e;
+  background-color: #f9f7f7;
+}
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+}
+h2 {
+  color: #1b508d;
+  border-bottom: 1px solid;
+  text-align: center;
+  padding-bottom: 20px;
+}
+h3 {
+  color: #1b508d;
+}
+
+p {
+  font-size: larger;
+}
