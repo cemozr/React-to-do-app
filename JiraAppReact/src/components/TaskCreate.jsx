@@ -3,9 +3,11 @@ import "../../public/taskCreate.css";
 import App from "../App";
 import TaskList from "./TaskList";
 
-function TaskCreate({ onCreate, editMode, onUpdate }) {
-  const [taskInput, setTaskInput] = useState("");
-  const [taskDescInput, setTaskDescInput] = useState("");
+function TaskCreate({ onCreate, editMode, onUpdate, task }) {
+  const [taskInput, setTaskInput] = useState(editMode ? task.title : "");
+  const [taskDescInput, setTaskDescInput] = useState(
+    editMode ? task.description : ""
+  );
 
   const taskInputHandler = (e) => {
     setTaskInput(e.target.value);
@@ -14,16 +16,16 @@ function TaskCreate({ onCreate, editMode, onUpdate }) {
   const taskDescInputHandler = (e) => {
     setTaskDescInput(e.target.value);
   };
+
   const createTaskHandler = (e) => {
     e.preventDefault();
     if (editMode) {
       onUpdate(task.id, taskInput, taskDescInput);
     } else {
       onCreate(taskInput, taskDescInput);
+      setTaskInput(" ");
+      setTaskDescInput(" ");
     }
-
-    setTaskInput(" ");
-    setTaskDescInput(" ");
   };
   return (
     <div>
@@ -33,7 +35,7 @@ function TaskCreate({ onCreate, editMode, onUpdate }) {
           <input
             className="task-input task-input-title task-input-edit-mode"
             type="text"
-            placeholder="  Görev Giriniz"
+            placeholder="Görev Giriniz"
             onChange={taskInputHandler}
             value={taskInput}
           />
@@ -45,14 +47,14 @@ function TaskCreate({ onCreate, editMode, onUpdate }) {
             id=""
             cols="100"
             rows="8"
-            placeholder="  Açıklama Giriniz"
+            placeholder=" Açıklama Giriniz"
             onChange={taskDescInputHandler}
             value={taskDescInput}
           ></textarea>
           <button
             className="create-task-btn task-input-edit-mode"
-            type="submit"
-            onClick={onUpdate}
+            type="button"
+            onClick={createTaskHandler}
           >
             Düzenle
           </button>
@@ -60,11 +62,11 @@ function TaskCreate({ onCreate, editMode, onUpdate }) {
         </form>
       ) : (
         <form className="task-form">
-          <label>Görev Giriniz</label>
+          <label>Görev</label>
           <input
             className="task-input task-input-title"
             type="text"
-            placeholder="    Task Giriniz"
+            placeholder="Görev Giriniz"
             onChange={taskInputHandler}
             value={taskInput}
           />
@@ -76,13 +78,13 @@ function TaskCreate({ onCreate, editMode, onUpdate }) {
             id=""
             cols="100"
             rows="8"
-            placeholder="  Açıklama Giriniz"
+            placeholder=" Açıklama Giriniz"
             onChange={taskDescInputHandler}
             value={taskDescInput}
           ></textarea>
           <button
             className="create-task-btn"
-            type="submit"
+            type="button"
             onClick={createTaskHandler}
           >
             Oluştur

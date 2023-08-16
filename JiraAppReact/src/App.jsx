@@ -34,10 +34,27 @@ function App() {
     });
     setTaskList(afterDelete);
   };
+  const updateTask = (id, updatedTaskInput, updatedTaskDescInput) => {
+    const updatedTasks = taskList.map((task) => {
+      if (task.id === id) {
+        return {
+          id,
+          title: updatedTaskInput,
+          description: updatedTaskDescInput,
+        };
+      }
+      return task;
+    });
+    setTaskList(updatedTasks);
+  };
   return (
     <div>
       <TaskCreate onCreate={createTask} />
-      <TaskList taskList={taskList} onDelete={deleteTask} />
+      <TaskList
+        taskList={taskList}
+        onDelete={deleteTask}
+        onUpdate={updateTask}
+      />
     </div>
   );
 }

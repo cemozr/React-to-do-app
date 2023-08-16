@@ -12,14 +12,14 @@ function TaskShow({ task, onDelete, onUpdate }) {
     setEditMode(!editMode);
   };
   const handleSubmit = (id, updatedTaskInput, updatedTaskDescInput) => {
-    setEditMode(false);
     onUpdate(id, updatedTaskInput, updatedTaskDescInput);
+    setEditMode(false);
   };
 
   return (
     <div className="task-card">
       {editMode ? (
-        <TaskCreate editMode={editMode} onUpdate={onUpdate} />
+        <TaskCreate editMode={editMode} onUpdate={handleSubmit} task={task} />
       ) : (
         <div>
           {" "}
