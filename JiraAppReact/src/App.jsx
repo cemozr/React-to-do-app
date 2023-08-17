@@ -17,14 +17,6 @@ function App() {
       },
     ];
     setTaskList(createdTasks);
-
-    // console.log(taskList);
-    // taskListHandler();
-    // return (
-    //   <div>
-    //     <TaskList taskName={taskList[0].title} task={taskList[0].description} />
-    //   </div>
-    // );
   };
   const deleteTask = (id) => {
     const afterDelete = taskList.filter((task) => {
