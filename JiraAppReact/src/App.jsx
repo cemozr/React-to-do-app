@@ -1,24 +1,32 @@
 import { useState } from "react";
 import TaskList from "./components/TaskList";
-import "./App.css";
+import "../public/App.css";
 import TaskCreate from "./components/TaskCreate";
 import TaskShow from "./components/TaskShow";
+import axios from "axios";
+import { useEffect } from "react";
 
 function App() {
   const [taskList, setTaskList] = useState([]);
 
-  const createTask = (taskInput, taskDescInput) => {
-    const createdTasks = [
-      ...taskList,
-      {
-        id: Math.round(Math.random() * 999999),
-        title: taskInput,
-        description: taskDescInput,
-      },
-    ];
+  const createTask = async (taskInput, taskDescInput) => {
+    const response = await axios.post("http://localhost:3000/tasks", {
+      title: taskInput,
+      description: taskDescInput,
+    });
+    const createdTasks = [...taskList, response.data];
     setTaskList(createdTasks);
+    console.log(response.data);
   };
-  const deleteTask = (id) => {
+  const fetchTasks = async () => {
+    const response = await axios.get("http://localhost:3000/tasks");
+    setTaskList(response.data);
+  };
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+  const deleteTask = async (id) => {
+    await axios.delete(`http://localhost:3000/tasks/${id}`);
     const afterDelete = taskList.filter((task) => {
       if (task.id !== id) {
         return task;
@@ -26,7 +34,11 @@ function App() {
     });
     setTaskList(afterDelete);
   };
-  const updateTask = (id, updatedTaskInput, updatedTaskDescInput) => {
+  const updateTask = async (id, updatedTaskInput, updatedTaskDescInput) => {
+    await axios.put(`http://localhost:3000/tasks/${id}`, {
+      title: updatedTaskInput,
+      description: updatedTaskDescInput,
+    });
     const updatedTasks = taskList.map((task) => {
       if (task.id === id) {
         return {
