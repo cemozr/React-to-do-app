@@ -1,28 +1,29 @@
-import TaskList from "./TaskList";
 import "../../public/taskCard.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TaskCreate from "./TaskCreate";
-function TaskShow({ task, onDelete, onUpdate }) {
-  // console.log(task);
+import TasksContext from "../context/TaskContext";
+
+function TaskShow({ task }) {
+  const { deleteTask, updateTask } = useContext(TasksContext);
+
   const [editMode, setEditMode] = useState(false);
   const onDeleteHandler = () => {
-    onDelete(task.id);
+    deleteTask(task.id);
   };
   const onUpdateHandler = () => {
     setEditMode(!editMode);
   };
   const handleSubmit = (id, updatedTaskInput, updatedTaskDescInput) => {
-    onUpdate(id, updatedTaskInput, updatedTaskDescInput);
+    updateTask(id, updatedTaskInput, updatedTaskDescInput);
     setEditMode(false);
   };
 
   return (
     <div className="task-card">
       {editMode ? (
-        <TaskCreate editMode={editMode} onUpdate={handleSubmit} task={task} />
+        <TaskCreate editMode={editMode} task={task} onUpdate={handleSubmit} />
       ) : (
         <div>
-          {" "}
           <h2>Görev No: {task.id}</h2>
           <h3>{task.title}</h3>
           <p>{task.description}</p>

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "../../public/taskCreate.css";
-import App from "../App";
-import TaskList from "./TaskList";
+import TasksContext from "../context/TaskContext";
 
-function TaskCreate({ onCreate, editMode, onUpdate, task }) {
+function TaskCreate({ editMode, task, onUpdate }) {
+  const { createTask, updateTask } = useContext(TasksContext);
   const [taskInput, setTaskInput] = useState(editMode ? task.title : "");
   const [taskDescInput, setTaskDescInput] = useState(
     editMode ? task.description : ""
@@ -22,7 +22,7 @@ function TaskCreate({ onCreate, editMode, onUpdate, task }) {
     if (editMode) {
       onUpdate(task.id, taskInput, taskDescInput);
     } else {
-      onCreate(taskInput, taskDescInput);
+      createTask(taskInput, taskDescInput);
       setTaskInput(" ");
       setTaskDescInput(" ");
     }
